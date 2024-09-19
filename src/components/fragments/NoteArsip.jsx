@@ -7,7 +7,7 @@ export default function NoteArsip({ notes, deleteNoteFromArsip, moveArsipToNotes
   return (
     <div>
       <h2 className="note-item__title">Arsip</h2>
-      {archivedNotes.length === 0 ? (
+      {!archivedNotes.length ? (
         <div className="notes-list__empty-message">Tidak ada Arsip</div>
       ) : (
         <div className="notes-list">

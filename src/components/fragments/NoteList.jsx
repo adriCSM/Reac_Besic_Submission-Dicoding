@@ -8,7 +8,7 @@ export default function NoteList({ notes, arsipNote, deleteNote }) {
   return (
     <div>
       <h2 className="note-item__title">Catatan Aktif</h2>
-      {activeNotes.length === 0 ? (
+      {!activeNotes.length ? (
         <div className="notes-list__empty-message">Tidak ada catatan</div>
       ) : (
         <div className="notes-list">

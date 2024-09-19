@@ -12,33 +12,23 @@ export default class NoteInput extends React.Component {
       body: '',
       character: 50,
     };
-
-    this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
-    this.onBodyChangeEventHandler = this.onBodyChangeEventHandler.bind(this);
-    this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
   }
 
   //  EVENT KETIKA TITLE DIISI
-  onTitleChangeEventHandler(event) {
-    this.setState((prevState) => {
-      return {
-        title: event.target.value,
-        character: prevState.character - 1,
-      };
-    });
-  }
+  onTitleChangeEventHandler = (event) => {
+    const title = event.target.value;
+    this.setState({ title: title.slice(0, 50) });
+  };
 
   // EVENT KETIKA BODY DIISI
-  onBodyChangeEventHandler(event) {
-    this.setState(() => {
-      return {
-        body: event.target.value,
-      };
+  onBodyChangeEventHandler = (event) => {
+    this.setState({
+      body: event.target.value,
     });
-  }
+  };
 
   // EVENT KETIKA SUBMIT
-  onSubmitEventHandler(event) {
+  onSubmitEventHandler = (event) => {
     event.preventDefault();
     this.props.addNote({
       ...this.state,
@@ -46,18 +36,19 @@ export default class NoteInput extends React.Component {
       archived: false,
       id: +new Date(),
     });
-  }
+  };
 
   render() {
     return (
       <div className="note-input">
         <h2 className="note-input__title">Buat Catatan</h2>
-        <p className="note-input__title__char-limit">Sisa karakter: {this.state.character}</p>
+        <p className="note-input__title__char-limit">
+          Sisa karakter: {this.state.character - this.state.title.length}/50
+        </p>
         <form onSubmit={this.onSubmitEventHandler}>
           <Input
             type="text"
             placeholder="Ini adalah judul..."
-            max={50}
             value={this.state.title}
             onChange={this.onTitleChangeEventHandler}
           />

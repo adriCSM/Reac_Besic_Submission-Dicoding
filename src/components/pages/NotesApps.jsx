@@ -12,24 +12,19 @@ export default class NotesApps extends React.Component {
       notes: getInitialData(),
       searchQuery: '',
     };
-    this.addNoteEventHandler = this.addNoteEventHandler.bind(this);
-    this.moveNoteToArsiptEventListener = this.moveNoteToArsiptEventListener.bind(this);
-    this.deleteNoteEventListener = this.deleteNoteEventListener.bind(this);
-    this.moveArsipToNotesEventListener = this.moveArsipToNotesEventListener.bind(this);
-    this.searchNote = this.searchNote.bind(this);
   }
 
   // EVENT ADD NOTE
-  addNoteEventHandler(note) {
+  addNoteEventHandler = (note) => {
     this.setState((prevState) => {
       return {
         notes: [...prevState.notes, note],
       };
     });
-  }
+  };
 
   // EVENT MOVE NOTE TO ARSIP
-  moveNoteToArsiptEventListener(id) {
+  moveNoteToArsiptEventListener = (id) => {
     this.setState((prevState) => {
       const newNotes = prevState.notes.map((note) =>
         note.id === id ? { ...note, archived: true } : note,
@@ -38,20 +33,20 @@ export default class NotesApps extends React.Component {
         notes: newNotes,
       };
     });
-  }
+  };
 
   // EVENT DELETE NOTE
-  deleteNoteEventListener(id) {
+  deleteNoteEventListener = (id) => {
     this.setState((prevState) => {
       const findNote = prevState.notes.find((note) => note.id === id);
       return {
         notes: prevState.notes.filter((note) => note.id !== id),
       };
     });
-  }
+  };
 
   // EVENT MOVE ARSIP TO NOTES
-  moveArsipToNotesEventListener(id) {
+  moveArsipToNotesEventListener = (id) => {
     this.setState((prevState) => {
       const newNotes = prevState.notes.map((note) =>
         note.id === id ? { ...note, archived: false } : note,
@@ -60,12 +55,12 @@ export default class NotesApps extends React.Component {
         notes: newNotes,
       };
     });
-  }
+  };
 
   // SEARCH NOTE
-  searchNote(event) {
+  searchNote = (event) => {
     this.setState({ searchQuery: event.target.value });
-  }
+  };
 
   render() {
     const filteredNotes = this.state.notes.filter((note) =>
